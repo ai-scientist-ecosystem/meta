@@ -13,6 +13,7 @@ Inspired by Einstein, Tesla, and Hawking, we're building AI scientist agents tha
 - Integrate ethical decision-making into every feature
 
 ## 📋 Key Documents
+- **[GETTING_STARTED.md](./GETTING_STARTED.md)** - New contributor onboarding
 - **[ROADMAP.md](./ROADMAP.md)** - Detailed 36-month execution plan
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** - How to contribute
 - **[SECURITY.md](./SECURITY.md)** - Security policies
