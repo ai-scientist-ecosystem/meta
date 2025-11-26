@@ -36,7 +36,9 @@ services:
       - CONFIG_GIT_URI=https://github.com/ai-scientist-ecosystem/config-repo
       - CONFIG_GIT_BRANCH=main
       - EUREKA_URI=http://admin:admin@eureka-server:8761/eureka/
-      - ENCRYPT_KEY=${ENCRYPT_KEY:-changeme}
+      # IMPORTANT: Set a strong encryption key for production
+      # Generate with: openssl rand -base64 32
+      - ENCRYPT_KEY=${ENCRYPT_KEY:-}
     depends_on:
       eureka-server:
         condition: service_healthy
