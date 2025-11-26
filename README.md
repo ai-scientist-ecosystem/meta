@@ -47,8 +47,14 @@ Inspired by Einstein, Tesla, and Hawking, we're building AI scientist agents tha
 ### Infrastructure & Documentation
 | Repository | Purpose | Tech Stack |
 |-----------|---------|------------|
-| [infra](https://github.com/ai-scientist-ecosystem/infra) | Kubernetes, Terraform, CI/CD | K8s manifests, GitHub Actions |
+| [infra](./infra) | Service Discovery, Config Management, CI/CD | Spring Cloud (Eureka, Config), Docker |
 | [docs](https://github.com/ai-scientist-ecosystem/docs) | Planning documents, whitepapers | Markdown, DOCX |
+
+### Spring Cloud Infrastructure (infra/)
+| Component | Purpose | Port |
+|-----------|---------|------|
+| [Eureka Server](./infra/eureka-server) | Service registration and discovery | 8761 |
+| [Config Server](./infra/config-server) | Centralized configuration management | 8888 |
 
 ## 🚀 Quick Start
 
@@ -61,19 +67,25 @@ Inspired by Einstein, Tesla, and Hawking, we're building AI scientist agents tha
 
 ### Run MVP (Solar Storm Alerts)
 ```bash
-# 1. Start infrastructure
+# 1. Start infrastructure (Eureka, Config Server, Kafka, Redis, PostgreSQL)
 cd infra
-docker-compose up kafka redis postgres
+docker-compose up -d
 
-# 2. Run data collector
+# 2. Wait for services to be healthy
+docker-compose ps
+
+# 3. Access Eureka Dashboard
+open http://localhost:8761  # Credentials: admin/admin
+
+# 4. Run data collector
 cd data-collector
 ./mvnw spring-boot:run
 
-# 3. Run alert engine
+# 5. Run alert engine
 cd alert-engine
 ./mvnw spring-boot:run
 
-# 4. View dashboard
+# 6. View dashboard
 cd frontend
 npm install && npm run dev
 ```
