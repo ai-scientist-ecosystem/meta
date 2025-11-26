@@ -1,0 +1,42 @@
+#!/bin/sh
+# Maven Wrapper script
+# This script downloads and runs the Maven Wrapper
+
+set -e
+
+MAVEN_WRAPPER_JAR=".mvn/wrapper/maven-wrapper.jar"
+MAVEN_WRAPPER_PROPERTIES=".mvn/wrapper/maven-wrapper.properties"
+
+if [ ! -f "$MAVEN_WRAPPER_PROPERTIES" ]; then
+    echo "Maven wrapper properties file not found: $MAVEN_WRAPPER_PROPERTIES"
+    exit 1
+fi
+
+. "$MAVEN_WRAPPER_PROPERTIES"
+
+if [ ! -f "$MAVEN_WRAPPER_JAR" ]; then
+    echo "Downloading Maven wrapper..."
+    if command -v curl > /dev/null; then
+        curl -sL "$wrapperUrl" -o "$MAVEN_WRAPPER_JAR"
+    elif command -v wget > /dev/null; then
+        wget -q "$wrapperUrl" -O "$MAVEN_WRAPPER_JAR"
+    else
+        echo "Error: curl or wget is required to download Maven wrapper"
+        exit 1
+    fi
+fi
+
+MAVEN_HOME="$HOME/.m2/wrapper/dists/apache-maven-3.9.6"
+if [ ! -d "$MAVEN_HOME" ]; then
+    echo "Downloading Maven..."
+    mkdir -p "$HOME/.m2/wrapper/dists"
+    if command -v curl > /dev/null; then
+        curl -sL "$distributionUrl" -o /tmp/maven.zip
+    else
+        wget -q "$distributionUrl" -O /tmp/maven.zip
+    fi
+    unzip -q /tmp/maven.zip -d "$HOME/.m2/wrapper/dists"
+    rm /tmp/maven.zip
+fi
+
+exec "$MAVEN_HOME/bin/mvn" "$@"
