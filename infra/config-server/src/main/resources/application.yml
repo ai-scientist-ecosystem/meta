@@ -52,5 +52,7 @@ logging:
     org.springframework.cloud.config: INFO
 
 # Encryption key for sensitive properties
+# IMPORTANT: Set ENCRYPT_KEY environment variable in production
+# Generate a strong key with: openssl rand -base64 32
 encrypt:
-  key: ${ENCRYPT_KEY:changeme}
+  key: ${ENCRYPT_KEY:}
